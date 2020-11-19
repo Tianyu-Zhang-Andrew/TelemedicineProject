@@ -1,0 +1,337 @@
+const windowWidth = document.documentElement.clientWidth * 5/6;
+const windowHeight = document.documentElement.clientHeight;
+
+function addLocalVideo() {
+    Twilio.Video.createLocalVideoTrack().then(track => {
+        let video = document.getElementById('me');
+        let heightStr = (windowHeight * 0.85) + "px";
+
+        video.style.height = heightStr;
+        video.style.width = (windowHeight * 0.85 * 4 / 3) + "px";
+        video.appendChild(track.attach());
+    });
+};
+
+function setVideoSize(width, height){
+    console.log(width, height)
+    let tracksDivList = document.getElementsByClassName("smallScreen");
+    for(let i = 0; i < tracksDivList.length; i++){
+        tracksDivList[i].style.width = width;
+        tracksDivList[i].style.height = height;
+    }
+}
+
+function adjustAllVideo(tracksDiv){
+    let video = document.getElementsByClassName('mainScreen')[0];
+    let heightStr = (windowHeight * 0.85) + "px";
+
+    video.style.height = heightStr;
+    video.style.width = (windowHeight * 0.85 * 4 / 3.1) + "px";
+
+    console.log(video_room.participants.size)
+    
+    if(video_room.participants.size + 1 == 2){
+        let width = (windowWidth / 3);
+        let height = width * 3/4;
+
+        let widthStr = width + "px";
+        let heightStr = height + "px";
+
+        setVideoSize(widthStr, heightStr);
+
+        if(tracksDiv !== undefined){
+            tracksDiv.style.width = widthStr;
+            tracksDiv.style.height = heightStr;
+        }
+
+    }else{
+        let heightStr = (windowHeight * 0.4) + "px";
+        let widthStr = (windowHeight * 0.4 * 4 / 3) + "px";
+
+        setVideoSize(widthStr, heightStr);
+
+        if(tracksDiv !== undefined){
+            tracksDiv.style.width = widthStr;
+            tracksDiv.style.height = heightStr;
+        }
+    }
+}
+
+function addChangeMainScreenEvent(participantDiv){
+    participantDiv.addEventListener("click", () =>{
+        let mainScreen = document.getElementById("mainScreen");
+        let mainScreenVideo = mainScreen.getElementsByTagName("video")[0];
+        mainScreenVideo.setAttribute("id", "mainVideo")
+
+        let mainScreenName = mainScreen.nextElementSibling;
+        let mainScreenAudio = mainScreen.getElementsByTagName("audio");
+        console.log(mainScreenAudio);
+
+        let smallScreen = participantDiv.getElementsByClassName("smallScreen")[0]
+        let smallScreenVideo = smallScreen.getElementsByTagName("video")[0];
+        smallScreenVideo.setAttribute("id", "smallVideo")
+
+        let smallScreenName = smallScreen.nextElementSibling;
+        let smallScreenAudio = smallScreen.getElementsByTagName("audio");
+
+        temp = mainScreenName.innerHTML;
+        mainScreenName.innerHTML = smallScreenName.innerHTML;
+        smallScreenName.innerHTML = temp;
+
+        mainScreen.appendChild(smallScreenVideo);
+        smallScreen.appendChild(mainScreenVideo);
+
+        console.log(smallScreenAudio.length);
+
+        if(mainScreenAudio.length !== 0){
+            console.log(mainScreenAudio[0])
+            for(let i = 0; i < mainScreenAudio.length; i++){
+                mainScreenAudio[0].setAttribute("class", "mainAudio");
+                smallScreen.appendChild(mainScreenAudio[0]);
+            }
+        }
+        console.log(smallScreenAudio.length);
+
+        if(smallScreenAudio.length !== 0){
+            console.log(smallScreenAudio[0])
+            for(let i = 0; i < smallScreenAudio.length; i++){
+                smallScreenAudio[0].setAttribute("class", "smallAudio");
+                mainScreen.appendChild(smallScreenAudio[0]);
+            }
+        }
+
+        // console.log(mainScreen)
+        // console.log(smallScreen)
+    })
+}
+
+let connected = false;
+const logInPage = document.getElementById("logInPage");
+const createRoomButton = document.getElementById("createRoomButton");
+const mainDiv = document.getElementById("mainDiv");
+const header = document.getElementById("header");
+const usernameInput = document.getElementById('username');
+const room_nameInput = document.getElementById('room_name');
+const joinButton = document.getElementById('joinButton');
+const leaveButton = document.getElementById('leaveButton');
+const container = document.getElementById('container');
+const count = document.getElementById('count');
+let video_room;
+let room_name;
+
+function joinCall(event){
+    event.preventDefault();
+    let username = usernameInput.value;
+    room_name = room_nameInput.value;
+
+    if (!username) {
+        alert('Enter your name before connecting');
+        return;
+    }
+
+    if (!room_name) {
+        alert('Enter your room name before connecting');
+        return;
+    }
+
+    joinButton.disabled = true;
+    joinButton.innerHTML = 'Connecting...';
+    connect(username, room_name).then(() => {
+        logInPage.style.visibility = "hidden";
+        mainDiv.style.visibility = "visible";
+        header.style.visibility = "visible";
+    }).catch(() => {
+        joinButton.innerHTML = 'Join call';
+        joinButton.disabled = false;
+    });
+}
+
+function leaveCall(event){
+    event.preventDefault();
+    disconnect();
+    
+    logInPage.style.visibility = "visible";
+    mainDiv.style.visibility = "hidden";
+    header.style.visibility = "hidden";
+
+    joinButton.innerHTML = 'Join call';
+    joinButton.disabled = false;
+
+    connected = false;
+}
+
+function connect(username, room_name) {
+    let promise = new Promise((resolve, reject) => {
+
+        $.ajax({
+            url:"/token/",
+            type:"POST",
+            data: {"username":username, "room_name": room_name},
+
+            success:function(token){
+                try {
+                    if(token === "noRoom"){
+                        alert("Room name does not exist")
+                        reject();
+                    }else{
+                        Twilio.Video.connect(token, {name:room_name}).then(room => {
+                            video_room = room
+                            console.log(username + ': Successfully joined a Room:' + room);
+                            room.participants.forEach(participantConnected);
+                            room.on('participantConnected', participantConnected);
+                            room.on('participantDisconnected', participantDisconnected);
+    
+                            connected = true;
+
+                            roomnameHeader = document.getElementById('roomnameHeader');
+                            roomnameHeader.innerHTML = "Room name: " + room_name;
+                            updateParticipantCount();
+    
+                        }, error => {
+                            console.error('Unable to connect to Room: ' + error.message);
+                            reject();
+                        });
+    
+                        resolve();
+                    }
+
+                }catch(err){
+                    console.log(err)
+                    reject();
+                }
+            },
+
+            error: function(){
+                reject();
+            }
+        });
+    });
+
+    return promise;
+};
+
+function updateParticipantCount() {
+    if (!connected)
+        count.innerHTML = 'Disconnected.';
+    else
+        count.innerHTML = (video_room.participants.size + 1) + ' participants online.';
+};
+
+function participantConnected(participant) {
+
+    let participantDiv = document.createElement('div');
+    participantDiv.setAttribute('id', participant.sid);
+    participantDiv.setAttribute('class', 'participant');
+
+    let tracksDiv = document.createElement('div');
+    tracksDiv.setAttribute("class", "tracksDiv");
+    participantDiv.appendChild(tracksDiv);
+
+    let labelDiv = document.createElement('div');
+    labelDiv.innerHTML = participant.identity;
+    participantDiv.appendChild(labelDiv);
+
+    container.appendChild(participantDiv);
+
+    participant.tracks.forEach(publication => {
+        if (publication.isSubscribed)
+            trackSubscribed(tracksDiv, publication.track);
+    });
+    participant.on('trackSubscribed', track => trackSubscribed(tracksDiv, track));
+    participant.on('trackUnsubscribed', trackUnsubscribed);
+
+    adjustAllVideo(tracksDiv);
+    updateParticipantCount();
+};
+
+function participantDisconnected(participant) {
+    document.getElementById(participant.sid).remove();
+    adjustAllVideo();
+    updateParticipantCount();
+};
+
+function trackSubscribed(div, track) {
+    if (track.kind !== 'data') {
+        div.appendChild(track.attach());
+    }else{
+         track.on('message', dataStr => {
+            console.log(dataStr);
+            let dataList = dataStr.split(",");
+            console.log(dataList);
+
+            let heartRateValue = document.getElementById("heartRateValue");
+            heartRateValue.innerHTML = dataList[0]
+
+            let bloodPressureValue = document.getElementById("bloodPressureValue");
+            bloodPressureValue.innerHTML = dataList[1]
+
+            bodyTemperatureValue = document.getElementById("bodyTemperatureValue")
+            bodyTemperatureValue.innerHTML = dataList[2]
+        });
+    }
+}
+
+function trackUnsubscribed(track) {
+    if (track.kind !== 'data') {
+        console.log(track.kind);
+        track.detach().forEach(element => element.remove());
+    }
+};
+
+function deleteRoom(){
+    $.ajax({
+        url:"/deleteRoom/",
+        type:"Post",
+
+        data: {"room_name":room_name},
+
+        success:function(){
+            console.log("Deletion successful")
+        },
+
+        error: function(error){
+            alert(error.message)
+        }
+    });
+}
+
+function disconnect() {
+    if(video_room.participants.size + 1 == 1){
+        console.log("last");
+        deleteRoom();
+    }
+
+    video_room.disconnect();
+    while (container.lastChild.id != 'mainScreenDiv')
+        container.removeChild(container.lastChild);
+
+    connected = false;
+
+    let video = document.getElementById('me');
+    let heightStr = (windowHeight * 0.8) + "px";
+
+    video.style.height = heightStr;
+    video.style.width = (windowHeight * 0.8 * 4 / 3) + "px";
+
+    updateParticipantCount();
+};
+
+function createRoomName(){
+    $.ajax({
+        url:"/room/",
+        type:"GET",
+
+        success:function(roomName){
+            alert("Your room name is " + roomName + ", please use this room name to join a room")
+        },
+
+        error: function(error){
+            alert(error.message)
+        }
+    });
+}
+
+addLocalVideo();
+joinButton.addEventListener('click', joinCall);
+leaveButton.addEventListener('click', leaveCall);
+createRoomButton.addEventListener('click', createRoomName)

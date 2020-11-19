@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+    <head>
+        <link rel="SHORTCUT ICON" href="../static/Images/favicon.ico">
+        <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="../static/Css/styles.css">
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    </head>
+    <body>
+
+        <div id="logInPage">
+            <form id = "room_info_form">
+                <img src="../static/Images/Logo.jpg" id="logo"><br>
+
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <img class="inputIcon" src="../static/Images/user-svgrepo-com.svg"/>
+                    </span>
+                    
+                    <input 
+                        type="text"
+                        class="form-control"
+                        name=”username”
+                        id="username"
+                        placeholder=" Input your username "
+                    >
+                </div>
+                
+                
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <img class="inputIcon" src="../static/Images/house-svgrepo-com.svg"/>
+                    </span>
+
+                    <input 
+                        type="text" 
+                        class="form-control"
+                        name=”room_name” 
+                        id="room_name"
+                        placeholder=" Input a room name "
+                    >
+                </div>
+
+                
+                <button id="joinButton" type="button" class="btn btn-primary btn-lg">
+                    Join call
+                </button>
+
+                <button id="createRoomButton" type="button" class="btn btn-primary btn-lg">
+                    Create a room
+                </button>
+
+            </form>
+        </div>
+        
+        <div id="header">
+            <text id="count"></text>
+            <text id="roomnameHeader"></text>
+            <button type="button" class="btn btn-danger" id="leaveButton">Leave call</button>
+        </div>
+
+        <div id="mainDiv">
+            <div id="dataDiv">
+                <div id="heartRateDiv", class="data">
+                    Heart rate:
+                    <p id="heartRateValue" class="value"></p>
+                </div>
+
+                <div id="bloodPressureDiv" class="data">
+                    Blood pressure:
+                    <p id="bloodPressureValue" class="value"></p>
+                </div>
+
+                <div id="bodyTemperatureDiv" class="data">
+                    Body temperature:
+                    <p id="bodyTemperatureValue" class="value"></p>
+                </div>
+            </div>
+
+            <div id="container" class="container">
+                <div id="local" class="mainScreen">
+                    <div id="me" class = "tracksDiv"></div>
+                    Me
+                </div>
+            </div>
+        </div>
+        
+        <script src="//media.twiliocdn.com/sdk/js/video/releases/2.3.0/twilio-video.min.js"></script>
+        <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script type="text/javascript" src="../static/Js/app.js"></script>
+        <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        
+    </body>
+</html>

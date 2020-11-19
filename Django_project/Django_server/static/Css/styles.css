@@ -1,0 +1,163 @@
+body{
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color:gray;
+}
+
+.container {
+    flex: 5;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.mainScreen {
+    margin-bottom: 5px;
+    margin-right: 5px;
+    color: white;Z
+    font-weight: bold;
+}
+
+.mainScreen div {
+    text-align: center;
+    width: 100%; 
+    height: 100%;
+}
+
+.mainScreen video {
+    width: 100%; 
+    height: 100%;
+}
+
+.smallScreen {
+    margin-bottom: 5px;
+    margin-right: 5px;
+    color: white;
+    font-weight: bold;
+}
+
+.smallScreen div {
+    text-align: center;
+}
+
+.smallScreen video {
+    width: 100%; 
+    height: 100%;
+}
+
+.data{
+    border: white solid 1px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.input-group{
+    margin: 15px;
+}
+
+.inputIcon{
+    height: 20px;
+    display: inline;
+    margin-right: 5px;
+}
+
+#username{
+    height: 40px;
+    display: inline;
+}
+
+#logInPage{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-image: url(../Images/background.jpeg);
+    background-repeat: no-repeat;
+    background-position-x: center;
+}
+
+#room_name{
+    height: 40px;
+}
+
+#room_info_form{
+    position: absolute;
+    top: 10%;
+    left: 1%;
+    height: 80%;
+    width: 25%;
+    text-align: center;
+    display: inline-block;
+    background-color: #f3f3f3;
+    border-radius: 10px;
+}
+
+#joinButton{
+    width: 90%;
+    display: inline;
+}
+
+#createRoomButton{
+    margin-top: 15px;
+    width: 90%;
+    display: inline;
+}
+
+#leaveButton{
+    margin: 5px;
+    font-weight: bold;
+}
+
+#dataDiv{
+    flex: 1;
+    border: white solid 3px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    background-color: grey;
+}
+
+#count{
+    margin-right: 10px;
+}
+
+#roomnameHeader{
+    margin-right: 10px;
+}
+
+#mainDiv{
+    top: 8%;
+    position: absolute;
+    width: 99%;
+    height: 90%;
+    display: flex;
+    flex-direction: row;
+    visibility: hidden;
+}
+
+#logo{
+    margin-top: 10px;
+    height: 90px;
+    width: 150px;
+}
+
+#header{
+    visibility: hidden;
+    color: #f3f3f3;
+    font-weight: bold;
+}
+
+text{
+    display: block;
+    font-weight: bold;
+    display: inline-block;
+}
+
