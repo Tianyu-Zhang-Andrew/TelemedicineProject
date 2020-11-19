@@ -1,2 +1,2 @@
 # TelemedicineProject
-A telemedicine project with video conderencing function
+A telemedicine project with video conferencing function
