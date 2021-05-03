@@ -1,0 +1,61 @@
+Heart rate monitor
+{
+    "00001800-0000-1000-8000-00805f9b34fb": {
+        "characteristics": {
+            "00002a00-0000-1000-8000-00805f9b34fb": [Object], 
+            "00002a01-0000-1000-8000-00805f9b34fb": [Object], 
+            "00002aa6-0000-1000-8000-00805f9b34fb": [Object]
+        }, 
+        
+        "characteristicsCount": 3, "isPrimary": true, "uuid": "00001800-0000-1000-8000-00805f9b34fb"
+    }, 
+
+    "00001801-0000-1000-8000-00805f9b34fb": {
+        "characteristics": {
+            "00002a05-0000-1000-8000-00805f9b34fb": [Object]
+        },
+        
+        "characteristicsCount": 1, "isPrimary": true, "uuid": "00001801-0000-1000-8000-00805f9b34fb"
+    }, 
+    
+    "0000180d-0000-1000-8000-00805f9b34fb": {
+        "characteristics": {
+            "00002a37-0000-1000-8000-00805f9b34fb": [Object], *(data)
+            "00002a38-0000-1000-8000-00805f9b34fb": [Object], 
+            "00002a39-0000-1000-8000-00805f9b34fb": [Object]
+        }, 
+        
+        "characteristicsCount": 3, "isPrimary": true, "uuid": "0000180d-0000-1000-8000-00805f9b34fb"
+    }
+}
+
+
+Thermometer
+{
+    "00001800-0000-1000-8000-00805f9b34fb": {
+        "characteristics": {
+            "00002a00-0000-1000-8000-00805f9b34fb": [Object], 
+            "00002a01-0000-1000-8000-00805f9b34fb": [Object], 
+            "00002aa6-0000-1000-8000-00805f9b34fb": [Object]
+        }, 
+            
+        "characteristicsCount": 3, "isPrimary": true, "uuid": "00001800-0000-1000-8000-00805f9b34fb"
+    }, 
+    
+    "00001801-0000-1000-8000-00805f9b34fb": {
+        "characteristics": {
+            "00002a05-0000-1000-8000-00805f9b34fb": [Object]
+        }, 
+        
+        "characteristicsCount": 1, "isPrimary": true, "uuid": "00001801-0000-1000-8000-00805f9b34fb"
+    }, 
+    
+    "00001809-0000-1000-8000-00805f9b34fb": {
+        "characteristics": {
+            "00002a1c-0000-1000-8000-00805f9b34fb": [Object], *(data)
+            "00002a21-0000-1000-8000-00805f9b34fb": [Object]
+        }, 
+            
+        "characteristicsCount": 2, "isPrimary": true, "uuid": "00001809-0000-1000-8000-00805f9b34fb"
+    }
+}

@@ -1,8 +1,6 @@
 import {
     StyleSheet,
-    Dimensions 
 } from 'react-native';
-import { withTheme } from 'react-native-elements';
   
 
 const styles = StyleSheet.create({
@@ -118,9 +116,8 @@ const styles = StyleSheet.create({
     
     dataView:{
       flex: 1,
-      backgroundColor:"green",
-      height: "95%",
-      backgroundColor: "grey",
+      height: "90%",
+      backgroundColor: "black",
       borderColor: "white",
       borderWidth: 3,
       borderRadius: 5,
@@ -128,18 +125,29 @@ const styles = StyleSheet.create({
       flexDirection: "column"
     },
 
+    bluetoothOptView:{
+      flex: 3,
+      display: "flex",
+      justifyContent: "space-around",
+      alignItems: "center",
+    },
+
     label:{
+      flex: 1,
       fontWeight: "bold",
-      color: "white"
+      color: "#f3f3f3",
+      fontSize:20
     },
 
     value:{
+      flex: 2,
       fontWeight: "bold",
-      color: "white"
+      color: "#f3f3f3",
+      fontSize:25
     },
 
     medicalData:{
-      flex: 1,
+      flex:3,
       borderColor: "white",
       borderWidth: 1,
       borderRadius: 5,
@@ -162,6 +170,82 @@ const styles = StyleSheet.create({
       textAlign: "center",
       color: "white",
       fontWeight: "bold"
+    },
+
+    bluetoothButtonDiv:{
+      display: "flex",
+      flexDirection: "row"
+    },
+
+    bluetoothDiv:{
+      position: "absolute",
+      top:"10%",
+      height: "80%",
+      width: "80%",
+      backgroundColor: "#f3f3f3",
+      borderRadius: 20,
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+
+    bluetoothStatusDiv:{
+      flex: 1,
+      borderBottomColor: "gray",
+      borderBottomWidth: 2,
+      width: "90%",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+
+    bluetoothStatusText:{
+      fontSize: 25,
+      fontWeight: "bold"
+    },
+
+    bluetoothResultDiv:{
+      flex: 5,
+      width: "100%",
+      display: "flex",
+      justifyContent: "flex-start",
+      alignItems: "center",
+    },
+
+    bluetoothResultflatList: {
+      width: "80%",
+    },
+
+    bluetoothDivButtonDiv:{
+      flex: 1,
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      borderTopWidth: 2,
+      borderTopColor: "gray",
+      width: "90%"
+    },
+
+    bluetoothDivButton:{
+      margin: 10,
+    },
+
+    bluetoothDiviceInfoDiv: {
+      width: "100%",
+      borderBottomColor: "gray",
+      borderBottomWidth: 1,
+      margin: 5,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      height: 50,
+    },
+
+    connectText: {
+      color: "blue",
+      textAlign: "center"
     }
   });
 

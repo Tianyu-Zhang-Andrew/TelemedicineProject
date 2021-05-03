@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react'
 import styles from "./style.js"
 import LocalView from "./LocalVideo.js"
 import ParticipantView from "./ParticipantView.js"
+import { Button  } from 'react-native-elements';
 
 import {
     View,
     Text,
-    Button,
+    // Button,
 } from 'react-native';
 
 function MainContainer(prop) {
@@ -47,34 +48,88 @@ function MainContainer(prop) {
             <View id="videoContainer" style={styles.videoContainer}>
 
               <View id="dataView" style={styles.dataView}>
-                <View id="heartRateView" style={styles.medicalData}>
-                  <Text id = "heartRateLabel" style={styles.label}>
+                <View id="monitoredDataView" style={styles.medicalData}>
+                  <Text id = "monitoredDataLabel" style={styles.label}>
                     Heart rate:
                   </Text>
 
-                  <Text id="heartRateValue" style={styles.value}>
-                    {prop.heartRate}
+                  <Text id="monitoredData" style={styles.value}>
+                    {prop.monitoredData}/min
                   </Text>
                 </View>
 
-                <View id="bloodPressureView" style={styles.medicalData}>
-                  <Text id = "bloodPressureLabel" style={styles.label}>
-                    Blood pressure:
-                  </Text>
+                <View id="bluetoothOptView" style={styles.bluetoothOptView}>
+                  {
+                    !prop.bluetoothConnected && 
+                    <Button
+                      id="scan"
+                      title={"Scan for device"}
+                      onPress={prop.bluetoothScan}
+                    />
+                  }
+                  
+                  {
+                    prop.bluetoothConnected && 
+                    <>
+                    {
+                      prop.monitoredServiceSelected && prop.monitoredCharacterSelected &&
 
-                  <Text id="bloodPressureValue" style={styles.value}>
-                    {prop.bloodPressure}
-                  </Text>
-                </View>
+                      <>
+                      {
+                        prop.bluetoothMonitoring &&
+                        <Button
+                          id="stopMonitor"
+                          title={"Stop monitoring"}
+                          onPress={prop.stopMonitor}
+                        />
+                      }
 
-                <View id="bodyTemperatureView" style={styles.medicalData}>
-                  <Text id = "bodyTemperatureLabel" style={styles.label}>
-                    Body temperature:
-                  </Text>
+                      {
+                        !prop.bluetoothMonitoring &&
+                        <>
+                        <Button
+                          id="monitor"
+                          title={"Start monitoring"}
+                          onPress={prop.monitor}
+                        />
 
-                  <Text id="bodyTemperatureValue" style={styles.value}>
-                    {prop.bodyTemperature}
-                  </Text>
+                        <Button
+                          id="reselectService"
+                          title={"Reselect service"}
+                          onPress={prop.reselectServiceAndCharacter}
+                        />
+                        </>
+                      }
+                      </>
+                      
+                    }
+                    
+                    {
+                      !prop.monitoredServiceSelected && !prop.monitoredCharacterSelected && 
+                      <Button
+                        id="SelectService"
+                        title={"Select service"}
+                        onPress={prop.selectBluetoothMonitoredService}
+                      />
+                    }
+
+                    {
+                      prop.monitoredServiceSelected && !prop.monitoredCharacterSelected && 
+                      <Button
+                        id="SelectCharacter"
+                        title={"Select character"}
+                        onPress={prop.selectBluetoothMonitoredCharacter}
+                      />
+                    }
+
+                    <Button
+                      id="disconnect"
+                      title={"disconnect"}
+                      onPress={prop.bluetoothDisconnect}
+                    />
+                    </>
+                  }
+                  
                 </View>
               </View>
 
