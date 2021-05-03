@@ -5,4 +5,5 @@ The server and doctor side web application is inside Django_peoject. (Django bac
 The patient side mobile application is inside webRTCmedicine. (react-native APP)
 The Video conferencing function is provided by Twilio.
 
-There are readme in each folder, see them for more information
+There are readme in each folder, see them for more information.(for developers)
+The Thessis report.pdf is an essay about this system.
