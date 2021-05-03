@@ -24,10 +24,8 @@ How to use: (Assume using andriod)
 5. After make sure the android simulator is running or an android device is connected, 
    run "yarn android" or "yarn react-native run-android" to start the application. 
    (the APP will be installed the first time this command is run)
-6. Start the doctor side application, get a room id from the doctor side (see readme in Django_project for 
-   more instuctions)
-7. Input the room id and a username to join in the video conference.
-8. When there are 2 participants, click on a video screen can change it to main (bigger) or smaller screen.
-9. Press "leave call" button to leave the video conference.
+6. Start the doctor side application (see readme in Django_project for more instuctions)
+8. Read Chapter 5 of the Thesis Report.pdf in the root TelemedicineProject folder for more instructions about how to operate the system.
 
-More detail about this system can be found in the Essay in the root TelemedicineProject folder.
+
+More pictures and details about this system can be found in the Chapter 5 of the Thesis Report.pdf in the root TelemedicineProject folder.
