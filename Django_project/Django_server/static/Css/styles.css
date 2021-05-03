@@ -19,8 +19,12 @@ body{
 .mainScreen {
     margin-bottom: 5px;
     margin-right: 5px;
-    color: white;Z
+    color: white;
     font-weight: bold;
+}
+
+.participantNameText {
+    margin-bottom: 5px
 }
 
 .mainScreen div {
@@ -35,8 +39,7 @@ body{
 }
 
 .smallScreen {
-    margin-bottom: 5px;
-    margin-right: 5px;
+    margin: 11px;
     color: white;
     font-weight: bold;
 }
@@ -81,7 +84,8 @@ body{
     position: absolute;
     background-image: url(../Images/background.jpeg);
     background-repeat: no-repeat;
-    background-position-x: center;
+    background-size:cover;
+    background-attachment: fixed;
 }
 
 #room_name{
@@ -123,6 +127,7 @@ body{
     flex-direction: column;
     border-radius: 5px;
     background-color: grey;
+    height: 50%
 }
 
 #count{
@@ -154,6 +159,17 @@ body{
     color: #f3f3f3;
     font-weight: bold;
 }
+
+#heartRateTitle{
+    font-weight: bold;
+    font-size: 30px
+}
+
+#heartRateValue{
+    font-weight: bold;
+    font-size: 30px
+}
+
 
 text{
     display: block;

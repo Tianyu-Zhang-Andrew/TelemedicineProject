@@ -47,8 +47,8 @@ function adjustAllVideo(){
         setVideoSize(widthStr, heightStr);
 
     }else{
-        let heightStr = (windowHeight * 0.4) + "px";
-        let widthStr = (windowHeight * 0.4 * 4 / 3) + "px";
+        let heightStr = (windowHeight * 0.3) + "px";
+        let widthStr = (windowHeight * 0.3 * 4 / 3) + "px";
         setVideoSize(widthStr, heightStr);
     }
 }
@@ -185,7 +185,9 @@ function participantConnected(participant) {
     tracksDiv.setAttribute('class', 'tracksDiv');
     participantDiv.appendChild(tracksDiv);
 
-    let name = document.createTextNode(participant.identity);
+    let name = document.createElement('text');
+    name.setAttribute('class', 'participantNameText');
+    name.innerHTML = participant.identity;
     participantDiv.appendChild(name);
 
     container.appendChild(participantDiv);
@@ -218,18 +220,9 @@ function trackSubscribed(div, track) {
         div.appendChild(track.attach());
     }else{
          track.on('message', dataStr => {
-            console.log(dataStr);
-            let dataList = dataStr.split(",");
-            console.log(dataList);
-
             let heartRateValue = document.getElementById("heartRateValue");
-            heartRateValue.innerHTML = dataList[0]
-
-            let bloodPressureValue = document.getElementById("bloodPressureValue");
-            bloodPressureValue.innerHTML = dataList[1]
-
-            bodyTemperatureValue = document.getElementById("bodyTemperatureValue")
-            bodyTemperatureValue.innerHTML = dataList[2]
+            heartRateValue.innerHTML = dataStr + "/min"
+            console.log(dataStr)
         });
     }
 }
