@@ -23,8 +23,14 @@ How to use:
    (for example https://a53e71b5c7f6.ngrok.io) then add "/video" after the address to visit the application
    (for example https://a53e71b5c7f6.ngrok.io/video)
 2. Click "Create a room" button, a unique room name will be generated, copy that room name and paste it in the
-   room name input field, chose a username and enter it in the username input field, click "Join call" to join room.
+   room name input field, chose a random username and enter it in the username input field, click "Join call" to join room.
    (do not make room name by yourself, it will give you an alert)
-3. After joining the room, your local video will have bigger size than other participants (main video screen), click other
+3. After joining the room, there is only one participant (you), use the patient side to join the same video room.
+   Read readme in unsw-gsbme-old/tcc-videoconf-mobile-app for more information about how to use the patient side APP
+4. Your local video will have bigger size than other participants (main video screen), click other
    participant' video to change them to the main video screen. (only workable when there are 2 participants)
-4. Click "Leave call" button to leave the conferencing room.
+5. Operate the Bluetooth module in the patient side APP, the doctor side should be able to receive data.
+   Read readme in unsw-gsbme-old/tcc-videoconf-mobile-app for more information about how to use the Bluetooth module.
+6. Click "Leave call" button to leave the conferencing room.
+
+More pictures and details about this system can be found in the Chapter 5 of the Thesis Report.pdf.
